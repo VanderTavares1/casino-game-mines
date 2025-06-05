@@ -5,6 +5,10 @@ const api = axios.create({
     baseURL: 'http://localhost:8080/usuario'
 })
 
+const apiJogo = axios.create({
+    baseURL: 'http://localhost:8080/jogo'
+})
+
 const apiEmail = axios.create({
   baseURL: 'http://localhost:8080/email'
 })
@@ -56,11 +60,11 @@ export async function buscarUsuarioLogado() {
 }
 
 export async function enviandoDadosIniciaisDaAposta(qntdBombas, apostaInicial) {
-  const response = await api.post("/mines/dados", {qntdBombas, apostaInicial});
+  const response = await apiJogo.post("/mines/dados", {qntdBombas, apostaInicial});
   return response.data;
 }
 
 export async function enviandoCaixaEscolhida(caixa_escolhida, idJogo) {
-  const response = await api.post("/minesJogar", { caixa_escolhida, idJogo });
+  const response = await apiJogo.post("/minesJogar", { caixa_escolhida, idJogo });
   return response.data;
 }

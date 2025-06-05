@@ -8,22 +8,21 @@ import {buscarUsuarioLogado} from '../utils/api'
 import EscolhaQuantidadeBombas from '../componentes/Select';
 import Input from '../componentes/Input'
 import {enviandoDadosIniciaisDaAposta} from '../utils/api'
+// eslint-disable-next-line
 import TelaJogo from '../paginas/TelaJogo'
-import { jwtDecode } from "jwt-decode";
 
 function Home() {
 
-    const [nome, setNome] = useState('');
-    const [role, setRole] = useState('');
+    const [nome, setNome] = useState("");
+    const [role, setRole] = useState("");
     const [qntdDinheiro, setQntdDineheiro] = useState(0);
     const [qntdJogosFeitos, setQntsJogosFeitos] = useState(0);
     const [quantosGanho, setQuantosGanho] = useState(0);
     const [quantosPerdeu, setQuantosPerdeu] = useState(0);
     const [nomesDeTodosUsuarios, setNomesDeTodosUsuarios] = useState([]);
     const navigate = useNavigate();
-    const [qntdBombas, setQntdBombas] = useState('');
-    const [apostaInicial, setApostaInicial] = useState();
-    const [userId, setUserId] = useState();
+    const [qntdBombas, setQntdBombas] = useState(0);
+    const [apostaInicial, setApostaInicial] = useState(0);
 
     useEffect(() => {
       buscarUsuarioLogado()
@@ -42,27 +41,11 @@ function Home() {
       });
     }, []);
 
-
-    useEffect(() => {
-      const token = localStorage.getItem("authToken");
-      if (token) {
-        try {
-                const decoded = jwtDecode(token);
-                setUserId(decoded.id);
-        } catch (err) {
-            console.error("Token inválido", err);
-          }
-        }
-      }, []);
-
-      useEffect(() => {
-        console.log('userId atualizado:', userId);
-      }, [userId]);
-
     async function enviandoDadosAposta(){
       try{
-        await enviandoDadosIniciaisDaAposta(qntdBombas, apostaInicial, userId)
+        await enviandoDadosIniciaisDaAposta(qntdBombas, apostaInicial)
         navigate('/telajogo')
+        // eslint-disable-next-line
         {console.log('enviandoDadosIniciaisDaAposta', enviandoDadosIniciaisDaAposta)}
       }catch{
         console.log("erro >>>");
