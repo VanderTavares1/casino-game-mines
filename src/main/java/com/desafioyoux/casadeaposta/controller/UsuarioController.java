@@ -12,11 +12,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/usuario")
-public class UsuarioController {
+class UsuarioController {
 
     @Autowired
     UsuarioService usuarioService;
@@ -49,16 +48,5 @@ public class UsuarioController {
     public Object verificandoTipoRole() {
         Object usuario = usuarioService.verificandoTipoRole();
         return usuario;
-    }
-
-    @PostMapping("/mines/dados")
-    public Long valorInicialEQntdBombas (@RequestBody InfosMinesDto infos) {
-        return usuarioService.iniciarJogo(infos);
-    }
-
-
-    @PostMapping("/minesJogar")
-    public String verifDimaOuBomba (@RequestBody EscolhaUsuarioDTO escolhaUsuarioDTO) {
-        return usuarioService.verifDimaOuBomba(escolhaUsuarioDTO);
     }
 }

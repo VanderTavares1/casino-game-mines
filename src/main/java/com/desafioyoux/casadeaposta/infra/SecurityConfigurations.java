@@ -32,6 +32,8 @@ public class SecurityConfigurations {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/usuario/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/usuario/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/jogo/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/jogo/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/email/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/email/**").permitAll()
                         .anyRequest().authenticated()

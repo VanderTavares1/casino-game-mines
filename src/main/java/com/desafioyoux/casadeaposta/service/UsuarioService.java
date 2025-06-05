@@ -131,19 +131,6 @@ public class UsuarioService {
             //lógica de ganhar o jogo e somar os valores
             return "DIAMANTE";
         }
-
-//        Double saldoInicial = usuarioRepository.valorDepositado();
-//        Double valorInicialApostado = jogoRepository.valorInicialApostado();
-
-//        System.out.println("Verificando em bombas: " + bombasSorteadas);
-//        if ((bombasSorteadas.contains(escolha)) && (jogo.getId() != null) ){
-//            System.out.println("bomba");
-////            Object resultado = saldoInicial - valorInicialApostado;
-//            return "BOMBA";
-//        }else {
-//            System.out.println("diamante");
-//            return "DIAMANTE";
-//        }
     }
 
 
