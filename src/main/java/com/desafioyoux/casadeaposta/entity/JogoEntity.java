@@ -19,12 +19,17 @@ public class JogoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Double valor_apostado;
-    private Set<Integer> posicoes_bomba;
-    private Integer valor_ganho;
-    private Integer posicao_escolhida;
-    private Status status;
+    @Column(name = "valor_apostado")
+    private Double valorApostado;
 
-//    @ManyToOne
-//    private UsuarioEntity usuarioEntity;
+    @Column(name = "posicoes_bomba")
+    private Set<Integer> posicoesBomba;
+
+    @Column(name = "valor_ganho")
+    private Integer valorGanho;
+
+    @Column(name = "posicao_escolhida")
+    private Integer posicaoEscolhida;
+
+    private Status status;
 }

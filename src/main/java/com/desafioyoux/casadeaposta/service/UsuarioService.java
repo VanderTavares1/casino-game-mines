@@ -108,13 +108,13 @@ public class UsuarioService {
     public Long valorInicialEQntdBombas(InfosMinesDto infos) {
         Random sorteio = new Random();
         JogoEntity jogoEntity = new JogoEntity();
-        jogoEntity.setValor_apostado(infos.getApostaInicial());
+        jogoEntity.setValorApostado(infos.getApostaInicial());
 
         Set<Integer> posicDasBombas = new HashSet<>();
 
         while (posicDasBombas.size() < infos.getQntdBombas()) {
             posicDasBombas.add(sorteio.nextInt(25));
-            jogoEntity.setPosicoes_bomba(posicDasBombas);
+            jogoEntity.setPosicoesBomba(posicDasBombas);
         }
         var jogo = jogoRepository.save(jogoEntity);
         return jogo.getId();
@@ -124,7 +124,7 @@ public class UsuarioService {
 
         JogoEntity jogo = jogoRepository.findById(escolhaUsuarioDTO.getIdJogo()).orElseThrow();
 
-        if (jogo.getPosicoes_bomba().contains(escolhaUsuarioDTO.getCaixa_escolhida())) {
+        if (jogo.getPosicoesBomba().contains(escolhaUsuarioDTO.getCaixa_escolhida())) {
             //lógica de perder o jogo
             return "BOMBA";
         } else {

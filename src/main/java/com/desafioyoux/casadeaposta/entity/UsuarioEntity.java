@@ -23,18 +23,25 @@ public class UsuarioEntity implements UserDetails {
     private Long id;
     private String nome;
     private String usuario;
+
+    @Column(name = "data_de_nascimento")
     private Date dataDeNascimento;
+
+    @Column(name = "qntd_jogos_feitos")
     private Integer qntdJogosFeitos;
     private String senha;
+
+    @Column(name = "qntd_dinheiro")
     private Double qntdDinheiro;
+
+    @Column(name = "quantos_ganho")
     private Integer quantosGanho;
+
+    @Column(name = "quantos_perdeu")
     private Integer quantosPerdeu;
 
     @Enumerated(EnumType.STRING)
     private Role role;
-
-//    @OneToMany
-//    private JogoEntity jogoEntity;
 
     public UsuarioEntity(String usuario, String encryptedPassword, Role role) {
     }
