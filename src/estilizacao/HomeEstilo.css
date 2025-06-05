@@ -1,0 +1,70 @@
+.home-container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  background-color: #6F102F;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x: hidden;
+}
+
+.sidebar {
+  flex-shrink: 0;
+  width: 240px;
+  background-color: #8A0F2D;
+  color: white;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-shadow: 1px 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.span_home, .p_home, .h1_home {
+  color: white;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 8% 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#img_cassino {
+  width: 18%;
+  border-radius: 25px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  object-fit: cover;
+  margin-top: 5%;
+}
+
+#img_cassino:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.5);
+}
+
+.saldo-box {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+}
+
+.span_home {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-voltar {
+  position: absolute;
+  top: 5px;
+  left: 7px;
+  width: 38px;
+  cursor: pointer;
+}

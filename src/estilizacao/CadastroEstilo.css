@@ -1,0 +1,108 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.cadastro-wrapper {
+    height: 100vh;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #6F102F;
+    box-sizing: border-box;
+}
+
+.container_cadastro {
+    width: 100%;
+    max-width: 800px;
+    background-color: #fffafa;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.div_pai {
+    background-color: #fffafa;
+    border: 3px solid #730f33;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.container_nome,
+.container_usuario {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input {
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid black;
+    outline: none;
+    margin-bottom: 3%;
+    font-size: 90%;
+}
+
+.div_cadastro_imagem {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    width: 20%;
+    margin-right: 15px;
+}
+
+button {
+    width: 50%;
+    margin-top: 1%;
+    margin-left: 4%;
+    padding: 2%;
+    cursor: pointer;
+    outline: none;
+    border-color: transparent;
+    border-radius: 5px;
+    box-shadow: 1px 1px black;
+    color: #fffafa;
+    background-color: #9E184B;
+    transition: all 0.8s ease-in-out;
+    font-size: 20px;
+}
+
+#btn_nova_conta {
+    background-color: whitesmoke;
+    color: #000;
+    border: 3px solid #9E184B;
+}
+
+#btn_nova_conta:hover {
+    background-color: #9E184B;
+    color: white;
+}
+
+#btn_cadastrar:hover {
+    background-color: #bb1b58;
+}
+
+.botoes_cadastro {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,66 @@
+
+import axios from 'axios'
+
+const api = axios.create({
+    baseURL: 'http://localhost:8080/usuario'
+})
+
+const apiEmail = axios.create({
+  baseURL: 'http://localhost:8080/email'
+})
+
+api.interceptors.request.use(config => {
+    const token = localStorage.getItem('authToken');
+    console.log('config token intercept >>>>>', token)
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+}, error => {
+  return Promise.reject(error);
+});
+
+function getAuthToken(){
+    return localStorage.getItem("authToken");
+}
+
+export function infomacesToken() {
+  const token = getAuthToken();
+  return JSON.parse(Buffer.from(token.split(".")[1], "base64").toString());
+}
+
+export function buscarTodosUsuários () {
+    return api.get('/buscarTodosUsuarios')
+}
+
+export async function fazerLogin(usuario, senha){
+    const response = await api.post("/login", {usuario, senha})
+    console.log('token >>>>', response.data);
+    localStorage.setItem('authToken', response.data.token);
+    return await response.data;
+}
+
+export async function fazendoCadastro(nome, usuario, dataDeNascimento, qntdJogosFeitos, senha, confirmarSenha, quantosGanho, quantosPerdeu, qntdDinheiro, role) {
+  const response = await api.post("/addUsuario", {nome, usuario, dataDeNascimento, qntdJogosFeitos, senha, confirmarSenha, quantosGanho, quantosPerdeu,qntdDinheiro, role})
+  return await response.data;
+}
+
+export async function requisicaoParaTrocarDeSenha(usuario){
+  const response = await apiEmail.post("/recuperar-senha", {usuario})
+  return await response.data
+}
+
+export async function buscarUsuarioLogado() {
+  const response = await api.get("/home")
+  return response.data
+}
+
+export async function enviandoDadosIniciaisDaAposta(qntdBombas, apostaInicial) {
+  const response = await api.post("/mines/dados", {qntdBombas, apostaInicial});
+  return response.data;
+}
+
+export async function enviandoCaixaEscolhida(caixa_escolhida, idJogo) {
+  const response = await api.post("/minesJogar", { caixa_escolhida, idJogo });
+  return response.data;
+}
