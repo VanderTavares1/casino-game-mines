@@ -1,5 +1,5 @@
 package com.desafioyoux.casadeaposta.infra;
-
+import com.desafioyoux.casadeaposta.entity.UsuarioEntity;
 import com.desafioyoux.casadeaposta.repository.UsuarioRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -15,8 +15,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 @Component
-public class SecurityFilter extends OncePerRequestFilter {
-
+public class SecurityFillter  extends OncePerRequestFilter {
     @Autowired
     TokenService tokenService;
 

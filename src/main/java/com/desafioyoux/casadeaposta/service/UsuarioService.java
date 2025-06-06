@@ -7,6 +7,7 @@ import com.desafioyoux.casadeaposta.entity.enums.Role;
 import com.desafioyoux.casadeaposta.repository.JogoRepository;
 import com.desafioyoux.casadeaposta.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -105,7 +106,8 @@ public class UsuarioService {
         }
     }
 
-    public Long valorInicialEQntdBombas(InfosMinesDto infos) {
+    public Long valorInicialEQntdBombas(InfosMinesDto infos, UsuarioEntity usuarioEntity) {
+        System.out.println("id jogador >>>>>>>>>>> " + usuarioEntity.getId());
         Random sorteio = new Random();
         JogoEntity jogoEntity = new JogoEntity();
         jogoEntity.setValorApostado(infos.getApostaInicial());
@@ -116,26 +118,29 @@ public class UsuarioService {
             posicDasBombas.add(sorteio.nextInt(25));
             jogoEntity.setPosicoesBomba(posicDasBombas);
         }
+        jogoEntity.setUsuarioId(usuarioEntity.getId());
+        jogoEntity.setSaldoUsuario(usuarioEntity.getQntdDinheiro());
         var jogo = jogoRepository.save(jogoEntity);
         return jogo.getId();
     }
 
     public String verifDimaOuBomba(EscolhaUsuarioDTO escolhaUsuarioDTO) {
-
         JogoEntity jogo = jogoRepository.findById(escolhaUsuarioDTO.getIdJogo()).orElseThrow();
-
         if (jogo.getPosicoesBomba().contains(escolhaUsuarioDTO.getCaixa_escolhida())) {
-            //lógica de perder o jogo
+            double resp = jogo.getValorApostado() - jogo.getSaldoUsuario();
+//            usuario.setQntdDinheiro(resp);
+//            jogo.setValorGanho(0);
+            System.out.println("BOMBA");
             return "BOMBA";
         } else {
-            //lógica de ganhar o jogo e somar os valores
+            // lógica de ganhar o jogo e     somar os valores
+            System.out.println("DIAMANTE");
             return "DIAMANTE";
         }
     }
 
 
-
-    public Long iniciarJogo(InfosMinesDto infos) {
-        return valorInicialEQntdBombas(infos);
+    public Long iniciarJogo(InfosMinesDto infos, UsuarioEntity usuarioEntity) {
+        return valorInicialEQntdBombas(infos, usuarioEntity);
     }
 }

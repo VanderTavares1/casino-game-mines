@@ -21,7 +21,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfigurations {
 
     @Autowired
-    private SecurityFilter securityFilter;
+    private SecurityFillter securityFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
@@ -32,7 +32,7 @@ public class SecurityConfigurations {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/usuario/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/usuario/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/jogo/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/jogo/**").authenticated()
                         .requestMatchers(HttpMethod.GET, "/jogo/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/email/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/email/**").permitAll()

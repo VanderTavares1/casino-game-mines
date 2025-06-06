@@ -31,5 +31,11 @@ public class JogoEntity {
     @Column(name = "posicao_escolhida")
     private Integer posicaoEscolhida;
 
+    @Column(name = "usuario_id")
+    private Long usuarioId;
+
+    @Column(name = "saldo")
+    private Double saldoUsuario;
+
     private Status status;
 }

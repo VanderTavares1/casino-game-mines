@@ -9,5 +9,4 @@ import org.springframework.stereotype.Repository;
 public interface JogoRepository extends JpaRepository<JogoEntity, Long> {
     @Query(value = "SELECT valor_apostado FROM jogo_entity", nativeQuery = true)
     Double valorInicialApostado();
-
 }

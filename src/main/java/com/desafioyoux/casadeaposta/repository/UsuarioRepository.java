@@ -20,4 +20,5 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long> {
 
     @Query(value = "SELECT qntd_dinheiro FROM usuario_entity", nativeQuery = true)
     Double valorDepositado();
+
 }

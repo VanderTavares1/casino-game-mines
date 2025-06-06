@@ -6,6 +6,7 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.desafioyoux.casadeaposta.entity.UsuarioEntity;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -25,7 +26,7 @@ public class TokenService {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             String token = JWT.create()
                     .withIssuer("auth-api")
-                    .withSubject(usuarioEntity.getUsername())
+                    .withSubject(usuarioEntity.getUsername()).withClaim("id", usuarioEntity.getId())
                     .withExpiresAt(genExpirationDate())
                     .sign(algorithm);
             return token;
