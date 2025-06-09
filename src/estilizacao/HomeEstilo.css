@@ -9,7 +9,7 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   overflow-x: hidden;
 }
-
+/* 
 .sidebar {
   flex-shrink: 0;
   width: 240px;
@@ -20,7 +20,39 @@
   flex-direction: column;
   align-items: flex-start;
   box-shadow: 1px 0 5px rgba(0, 0, 0, 0.3);
+} */
+.sidebar {
+  background-color: #8A0F2D;
+  color: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 260px;
 }
+.sidebar h1 {
+  font-size: 26px;
+  margin-bottom: 4px;
+}
+.sidebar h2 {
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 12px;
+}
+.sidebar .stat {
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.stat-label {
+  font-size: 16px;
+  color: #666;
+}
+.stat-value {
+  font-size: 20px;
+  font-weight: bold;
+}
+
 
 .span_home, .p_home, .h1_home {
   color: white;
@@ -28,14 +60,17 @@
 
 .main-content {
   flex-grow: 1;
-  padding: 8% 2%;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 
+
 #img_cassino {
-  width: 18%;
+  width: 35%;
   border-radius: 25px;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -63,8 +98,13 @@
 
 .btn-voltar {
   position: absolute;
-  top: 5px;
-  left: 7px;
+  top: 800px;
   width: 38px;
   cursor: pointer;
+  width: 110px;
+}
+
+.btn-voltar:hover {
+  transform: scale(1.05);
+  opacity: 0.8;
 }
