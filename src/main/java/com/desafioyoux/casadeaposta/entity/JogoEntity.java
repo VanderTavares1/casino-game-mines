@@ -34,6 +34,8 @@ public class JogoEntity {
     @Column(name = "saldo")
     private Double saldoUsuario;
 
+    private Integer quantidadeDiamante;
+
     private Status status;
 
     @ManyToOne

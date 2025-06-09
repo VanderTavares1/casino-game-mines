@@ -1,6 +1,5 @@
 package com.desafioyoux.casadeaposta.controller;
 import com.desafioyoux.casadeaposta.dto.*;
-import com.desafioyoux.casadeaposta.entity.JogoEntity;
 import com.desafioyoux.casadeaposta.entity.UsuarioEntity;
 import com.desafioyoux.casadeaposta.infra.TokenService;
 import com.desafioyoux.casadeaposta.service.UsuarioService;

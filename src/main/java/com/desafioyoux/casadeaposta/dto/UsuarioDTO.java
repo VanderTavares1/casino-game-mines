@@ -8,19 +8,19 @@ public class UsuarioDTO {
     private String usuario;
     private Date dataDeNascimento;
     private Double qntdDinheiro;
-    private Integer quantosGanho;
-    private Integer quantosPerdeu;
+    private Double quantosGanho;
+    private Double quantosPerdeu;
     private Role role;
 
     public UsuarioDTO(){
     }
 
-    public UsuarioDTO(String usuario, Date dataDeNascimento, Integer quantosGanho, Integer quantosPerdeu, Double qntdDinheiro, Role role) {
-        this.usuario = usuario;
+    public UsuarioDTO(Date dataDeNascimento, Double quantosPerdeu, Double quantosGanho, Double qntdDinheiro, String usuario, Role role) {
         this.dataDeNascimento = dataDeNascimento;
-        this.quantosGanho = quantosGanho;
         this.quantosPerdeu = quantosPerdeu;
+        this.quantosGanho = quantosGanho;
         this.qntdDinheiro = qntdDinheiro;
+        this.usuario = usuario;
         this.role = role;
     }
 
@@ -48,14 +48,6 @@ public class UsuarioDTO {
         this.role = role;
     }
 
-    public Integer getQuantosPerdeu() {
-        return quantosPerdeu;
-    }
-
-    public void setQuantosPerdeu(Integer quantosPerdeu) {
-        this.quantosPerdeu = quantosPerdeu;
-    }
-
     public Double getQntdDinheiro() {
         return qntdDinheiro;
     }
@@ -64,11 +56,19 @@ public class UsuarioDTO {
         this.qntdDinheiro = qntdDinheiro;
     }
 
-    public Integer getQuantosGanho() {
+    public Double getQuantosGanho() {
         return quantosGanho;
     }
 
-    public void setQuantosGanho(Integer quantosGanho) {
+    public void setQuantosGanho(Double quantosGanho) {
         this.quantosGanho = quantosGanho;
+    }
+
+    public Double getQuantosPerdeu() {
+        return quantosPerdeu;
+    }
+
+    public void setQuantosPerdeu(Double quantosPerdeu) {
+        this.quantosPerdeu = quantosPerdeu;
     }
 }

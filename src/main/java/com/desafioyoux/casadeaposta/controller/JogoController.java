@@ -11,10 +11,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/jogo")
@@ -31,5 +28,10 @@ public class JogoController {
     @PostMapping("/minesJogar")
     public ResultadoJogoDTO verifDimaOuBomba (@RequestBody EscolhaUsuarioDTO escolhaUsuarioDTO) {
         return usuarioService.verifDimaOuBomba(escolhaUsuarioDTO);
+    }
+
+    @PostMapping("/parar/{id}")
+    public Double pararJogo(@PathVariable Long id){
+        return usuarioService.pararJogo(id);
     }
 }

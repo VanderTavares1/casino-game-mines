@@ -35,10 +35,12 @@ public class UsuarioEntity implements UserDetails {
     private Double qntdDinheiro;
 
     @Column(name = "quantos_ganho")
-    private Integer quantosGanho;
+    private Double quantosGanho;
 
     @Column(name = "quantos_perdeu")
-    private Integer quantosPerdeu;
+    private Double quantosPerdeu;
+
+    private Integer jogosFeitos = 0;
 
     @Enumerated(EnumType.STRING)
     private Role role;

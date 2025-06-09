@@ -15,6 +15,7 @@ public class RoleUsuarioDTO {
     private String nome;
     private Integer qntdJogosFeitos;
     private Double qntdDinheiro;
-    private Integer quantosGanho;
-    private Integer quantosPerdeu;
+    private Double quantosGanho;
+    private Double quantosPerdeu;
+    private Integer qntdJogos;
 }
