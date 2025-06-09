@@ -12,7 +12,7 @@ function App() {
         <Route path="/cadastro" element={<Cadastro />} />
         <Route path='/esqueciSenha' element={<EsqueciSenhaModal />}/>
         <Route path='/home' element={<Home />}/>
-        <Route path='/telajogo' element={<TelaJogo />}/>
+        <Route path='/telajogo/:id' element={<TelaJogo />}/>
       </Routes>
     </BrowserRouter>
   );

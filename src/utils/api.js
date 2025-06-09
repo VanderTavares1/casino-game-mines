@@ -14,8 +14,17 @@ const apiEmail = axios.create({
 })
 
 api.interceptors.request.use(config => {
-    const token = localStorage.getItem('authToken');
-    console.log('config token intercept >>>>>', token)
+  const token = localStorage.getItem('authToken');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+}, error => {
+  return Promise.reject(error);
+});
+
+apiJogo.interceptors.request.use(config => {
+  const token = localStorage.getItem('authToken');
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -64,7 +73,12 @@ export async function enviandoDadosIniciaisDaAposta(qntdBombas, apostaInicial) {
   return response.data;
 }
 
-export async function enviandoCaixaEscolhida(caixa_escolhida, idJogo) {
-  const response = await apiJogo.post("/minesJogar", { caixa_escolhida, idJogo });
+export async function enviandoCaixaEscolhida(caixa_escolhida, idJogo, quantidadeDiamantesEncontrados) {
+  const response = await apiJogo.post("/minesJogar", { caixa_escolhida, idJogo, quantidadeDiamantesEncontrados });
+  return response.data;
+}
+
+export async function enviandoDadosAposParar(idJogo) {
+  const response = await apiJogo.post(`/parar/${idJogo}`);
   return response.data;
 }

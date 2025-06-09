@@ -44,6 +44,10 @@
     border-radius: 8px;
     cursor: pointer;
     transition: 0.2s;
+    width: 30%;
+    font-size: 35px;
+    height: 10%;
+    margin-right: 3%;
 }
 
 #parar:hover {
@@ -53,4 +57,8 @@
 
 #parar:hover {
     background-color: #E0C3FC;
+}
+
+#img_diamante, #img_bomba{
+    width: 100%;
 }

@@ -41,17 +41,16 @@ function Home() {
       });
     }, []);
 
-    async function enviandoDadosAposta(){
-      try{
-        await enviandoDadosIniciaisDaAposta(qntdBombas, apostaInicial)
-        navigate('/telajogo')
-        // eslint-disable-next-line
-        {console.log('enviandoDadosIniciaisDaAposta', enviandoDadosIniciaisDaAposta)}
-      }catch{
-        console.log("erro >>>");
-        
+    async function enviandoDadosAposta() {
+      try {
+        const resposta = await enviandoDadosIniciaisDaAposta(qntdBombas, apostaInicial);
+        console.log('resposta', resposta)
+        navigate(`/telajogo/${resposta}`);
+      } catch (err) {
+        console.error("Erro ao enviar dados da aposta:", err);
       }
     }
+
 
   return (
     <div className="home-container" style={{ position: 'relative', minHeight: '100vh' }}>
