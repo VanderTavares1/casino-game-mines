@@ -6,7 +6,7 @@ export default function Input({value, onChange}) {
   return (
     <Box
       component="form"
-      sx={{ '& > :not(style)': { m: 1, width: '25ch' } }}
+      sx={{ '& > :not(style)': { m: 1, width: 200, fontSize: 70 } }}
       noValidate
       autoComplete="off"
     >
