@@ -12,4 +12,5 @@ import lombok.Setter;
 public class EscolhaUsuarioDTO {
     private Integer caixa_escolhida;
     private Long idJogo;
+    private Integer quantidadeDiamantesEncontrados;
 }

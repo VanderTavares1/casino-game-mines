@@ -113,31 +113,39 @@ public class UsuarioService {
         jogoEntity.setValorApostado(infos.getApostaInicial());
 
         Set<Integer> posicDasBombas = new HashSet<>();
-
         while (posicDasBombas.size() < infos.getQntdBombas()) {
             posicDasBombas.add(sorteio.nextInt(25));
-            jogoEntity.setPosicoesBomba(posicDasBombas);
         }
-        jogoEntity.setUsuarioId(usuarioEntity.getId());
+        jogoEntity.setPosicoesBomba(posicDasBombas);
+
+        jogoEntity.setUsuario(usuarioEntity);
         jogoEntity.setSaldoUsuario(usuarioEntity.getQntdDinheiro());
         var jogo = jogoRepository.save(jogoEntity);
         return jogo.getId();
     }
 
-    public String verifDimaOuBomba(EscolhaUsuarioDTO escolhaUsuarioDTO) {
+
+    public ResultadoJogoDTO verifDimaOuBomba(EscolhaUsuarioDTO escolhaUsuarioDTO) {
         JogoEntity jogo = jogoRepository.findById(escolhaUsuarioDTO.getIdJogo()).orElseThrow();
+        UsuarioEntity usuario = jogo.getUsuario();
+
         if (jogo.getPosicoesBomba().contains(escolhaUsuarioDTO.getCaixa_escolhida())) {
-            double resp = jogo.getValorApostado() - jogo.getSaldoUsuario();
-//            usuario.setQntdDinheiro(resp);
-//            jogo.setValorGanho(0);
+            double novoSaldo = usuario.getQntdDinheiro() - jogo.getValorApostado();
+            usuario.setQntdDinheiro(novoSaldo);
+            jogo.setValorGanho(0.0);
+            usuarioRepository.save(usuario);
+            jogoRepository.save(jogo);
             System.out.println("BOMBA");
-            return "BOMBA";
+            return new ResultadoJogoDTO("BOMBA", 0.0);
         } else {
-            // lógica de ganhar o jogo e     somar os valores
+            Double retornoDimas = jogo.getValorApostado() * (1 + (escolhaUsuarioDTO.getQuantidadeDiamantesEncontrados() * 0.33));
+            jogo.setValorGanho(retornoDimas);
+            jogoRepository.save(jogo);
             System.out.println("DIAMANTE");
-            return "DIAMANTE";
+            return new ResultadoJogoDTO("DIAMANTE", retornoDimas);
         }
     }
+
 
 
     public Long iniciarJogo(InfosMinesDto infos, UsuarioEntity usuarioEntity) {

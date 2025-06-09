@@ -26,16 +26,18 @@ public class JogoEntity {
     private Set<Integer> posicoesBomba;
 
     @Column(name = "valor_ganho")
-    private Integer valorGanho;
+    private Double valorGanho;
 
     @Column(name = "posicao_escolhida")
     private Integer posicaoEscolhida;
-
-    @Column(name = "usuario_id")
-    private Long usuarioId;
 
     @Column(name = "saldo")
     private Double saldoUsuario;
 
     private Status status;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    private UsuarioEntity usuario;
+
 }

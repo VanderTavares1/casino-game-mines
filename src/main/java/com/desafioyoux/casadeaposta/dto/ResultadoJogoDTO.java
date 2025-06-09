@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MinesDTO {
-    private Long id;
-    private String oqueFoiEncontrado;
+public class ResultadoJogoDTO {
+    private String resultado;
+    private Double valorGanho;
 }

@@ -2,6 +2,7 @@ package com.desafioyoux.casadeaposta.controller;
 
 import com.desafioyoux.casadeaposta.dto.EscolhaUsuarioDTO;
 import com.desafioyoux.casadeaposta.dto.InfosMinesDto;
+import com.desafioyoux.casadeaposta.dto.ResultadoJogoDTO;
 import com.desafioyoux.casadeaposta.entity.UsuarioEntity;
 import com.desafioyoux.casadeaposta.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class JogoController {
     }
 
     @PostMapping("/minesJogar")
-    public String verifDimaOuBomba (@RequestBody EscolhaUsuarioDTO escolhaUsuarioDTO) {
+    public ResultadoJogoDTO verifDimaOuBomba (@RequestBody EscolhaUsuarioDTO escolhaUsuarioDTO) {
         return usuarioService.verifDimaOuBomba(escolhaUsuarioDTO);
     }
 }
