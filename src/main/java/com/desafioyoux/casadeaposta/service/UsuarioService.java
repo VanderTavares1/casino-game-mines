@@ -137,19 +137,12 @@ public class UsuarioService {
         JogoEntity jogo = jogoRepository.findById(escolhaUsuarioDTO.getIdJogo()).orElseThrow();
         UsuarioEntity usuario = jogo.getUsuario();
 
-        Integer jogosFeitos = usuario.getJogosFeitos();
-        if (jogosFeitos == null) {
-            jogosFeitos = 0;
-        }
-        usuario.setJogosFeitos(jogosFeitos + 1);
+        usuario.setJogosFeitos(usuario.getJogosFeitos() + 1);
 
         if (jogo.getPosicoesBomba().contains(escolhaUsuarioDTO.getCaixa_escolhida())) {
             double novoSaldo = usuario.getQntdDinheiro() - jogo.getValorApostado();
             usuario.setQntdDinheiro(novoSaldo);
-
-            Double totalPerdido = usuario.getQuantosPerdeu();
-            if (totalPerdido == null) totalPerdido = 0.0;
-            usuario.setQuantosPerdeu(totalPerdido + jogo.getValorApostado());
+            usuario.setQuantosPerdeu(usuario.getQuantosPerdeu() + jogo.getValorApostado());
 
             jogo.setValorGanho(0.0);
             usuarioRepository.save(usuario);
@@ -160,9 +153,7 @@ public class UsuarioService {
             jogo.setValorGanho(retornoDimas);
             jogo.setQuantidadeDiamante(escolhaUsuarioDTO.getQuantidadeDiamantesEncontrados());
 
-            Double totalGanho = usuario.getQuantosGanho();
-            if (totalGanho == null) totalGanho = 0.0;
-            usuario.setQuantosGanho(totalGanho + retornoDimas);
+            usuario.setQuantosGanho(usuario.getQuantosGanho() + retornoDimas);
 
             usuarioRepository.save(usuario);
             jogoRepository.save(jogo);
