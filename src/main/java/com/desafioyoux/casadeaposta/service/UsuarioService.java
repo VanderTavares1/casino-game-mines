@@ -109,6 +109,7 @@ public class UsuarioService {
 
     public Long valorInicialEQntdBombas(InfosMinesDto infos, UsuarioEntity usuarioEntity) {
         System.out.println("id jogador >>>>>>>>>>> " + usuarioEntity.getId());
+        Set<Integer> posicDasBombas = new HashSet<>();
         Random sorteio = new Random();
         JogoEntity jogoEntity = new JogoEntity();
         jogoEntity.setValorApostado(infos.getApostaInicial());
@@ -120,7 +121,6 @@ public class UsuarioService {
             throw new IllegalArgumentException("Adicione os valores necessários para iniciar a rodada!");
         }
 
-        Set<Integer> posicDasBombas = new HashSet<>();
         while (posicDasBombas.size() < infos.getQntdBombas()) {
             posicDasBombas.add(sorteio.nextInt(25));
         }
@@ -132,28 +132,28 @@ public class UsuarioService {
         return jogo.getId();
     }
 
-
     public ResultadoJogoDTO verifDimaOuBomba(EscolhaUsuarioDTO escolhaUsuarioDTO) {
         JogoEntity jogo = jogoRepository.findById(escolhaUsuarioDTO.getIdJogo()).orElseThrow();
         UsuarioEntity usuario = jogo.getUsuario();
 
-        usuario.setJogosFeitos(usuario.getJogosFeitos() + 1);
-
-        if (jogo.getPosicoesBomba().contains(escolhaUsuarioDTO.getCaixa_escolhida())) {
+        if (jogo.getPosicoesBomba().contains(escolhaUsuarioDTO.getCaixa_escolhida())) { // perdeu
             double novoSaldo = usuario.getQntdDinheiro() - jogo.getValorApostado();
             usuario.setQntdDinheiro(novoSaldo);
             usuario.setQuantosPerdeu(usuario.getQuantosPerdeu() + jogo.getValorApostado());
 
-            jogo.setValorGanho(0.0);
+            jogo.setValorGanho(jogo.getValorApostado() - jogo.getValorGanho());
+            usuario.setQuantosGanho(jogo.getValorApostado() - jogo.getValorGanho());
+            jogo.setQuantidadeDiamante(0);
             usuarioRepository.save(usuario);
             jogoRepository.save(jogo);
             return new ResultadoJogoDTO("BOMBA", 0.0);
         } else {
-            Double retornoDimas = jogo.getValorApostado() * (1 + (escolhaUsuarioDTO.getQuantidadeDiamantesEncontrados() * 0.33));
+            var quantidadeBombas = jogo.getPosicoesBomba().size();
+            Double retornoDimas = jogo.getValorApostado() * (1 + escolhaUsuarioDTO.getQuantidadeDiamantesEncontrados()) * (quantidadeBombas / 10.0);
             jogo.setValorGanho(retornoDimas);
             jogo.setQuantidadeDiamante(escolhaUsuarioDTO.getQuantidadeDiamantesEncontrados());
 
-            usuario.setQuantosGanho(usuario.getQuantosGanho() + retornoDimas);
+//            usuario.setQuantosGanho(usuario.getQuantosGanho() + retornoDimas);
 
             usuarioRepository.save(usuario);
             jogoRepository.save(jogo);
@@ -161,10 +161,9 @@ public class UsuarioService {
         }
     }
 
-
-
-
     public Long iniciarJogo(InfosMinesDto infos, UsuarioEntity usuarioEntity) {
+        usuarioEntity.setJogosFeitos(getUsuarioLogado().getJogosFeitos() + 1);
+        usuarioRepository.save(usuarioEntity);
         return valorInicialEQntdBombas(infos, usuarioEntity);
     }
 
@@ -172,15 +171,11 @@ public class UsuarioService {
         JogoEntity jogo = jogoRepository.findById(id).orElseThrow();
         UsuarioEntity usuario = usuarioRepository.findById(jogo.getUsuario().getId()).orElseThrow();
 
-        int qntdDimas = jogo.getQuantidadeDiamante();
-        double valorGanho = jogo.getValorApostado() * (1 + (qntdDimas * 0.33));
-
-        jogo.setValorGanho(valorGanho);
-        usuario.setQntdDinheiro(usuario.getQntdDinheiro() + valorGanho);
+        usuario.setQntdDinheiro(usuario.getQntdDinheiro() + jogo.getValorGanho());
 
         usuarioRepository.save(usuario);
         jogoRepository.save(jogo);
 
-        return valorGanho;
+        return jogo.getValorGanho();
     }
 }
