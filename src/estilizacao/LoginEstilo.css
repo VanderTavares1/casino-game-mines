@@ -129,3 +129,22 @@ h1 {
   justify-content: center;
   align-items: center;
 }
+
+.input-email {
+  background-image: url('../imagens/userBlack.svg');
+  background-repeat: no-repeat;
+  background-position: left;
+  padding-left: 30px;
+  cursor: text;
+  text-align: center;
+  font-family: 'Roboto';
+}
+
+.input-senha{
+  background-image: url('../imagens/senha.svg');
+  background-repeat: no-repeat;
+  background-position: left;
+  padding-left: 30px;
+  cursor: text;
+  text-align: center;
+}

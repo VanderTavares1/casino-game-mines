@@ -6,6 +6,7 @@ import logoYoxuTelaInicial from '../imagens/logoYoxuTelaLogin.png'
 import Cadastro from './Cadastro.js'
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import EsqueciSenha from './EsqueciSenhaModal.js';
+import user from '../imagens/userBlack.svg'
 
 function Login() {
 
@@ -48,6 +49,7 @@ return (
               <div className="form-group">
                 <label>E-mail:</label>
                 <input
+                  className='input-email'
                   type="email"
                   value={usuario}
                   onChange={e => setUsuario(e.target.value)}
@@ -57,6 +59,7 @@ return (
               <div className="form-group">
                 <label>Senha:</label>
                 <input
+                  className='input-senha'
                   type="password"
                   value={senha}
                   onChange={e => setSenha(e.target.value)}

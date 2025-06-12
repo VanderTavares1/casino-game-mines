@@ -1,5 +1,10 @@
-import importCofrinho from '../imagens/cofrinho.png';
-import sair from '../imagens/saindo.png';
+import importCofrinho from '../imagens/money.svg';
+import sair from '../imagens/sair.svg';
+import user from '../imagens/user.svg';
+import game from '../imagens/game.svg';
+import dinheiro from '../imagens/dinheiro.svg';
+import roleImg from '../imagens/role.svg';
+
 import '../estilizacao/HomeEstilo.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -24,16 +29,25 @@ export default function Menu({nome, role, qntdDinheiro, qntdJogos, quantosGanho,
       />
 
       <div className="sidebar">
-        <span className='span_home' style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: 20}}>
+
+        <div className='span_home' style={{display: 'flex', flexDirection: 'row', justifyContent: 'start', alignItems: 'center', marginTop: 10, marginRight: 20}}>
           <img src={importCofrinho} alt='cofrinho' style={{ width: 80 }}/>
-          <b>Saldo: R$ {formatoDinheiro(qntdDinheiro)}</b>
-        </span>
-        <h1 className='h1_home' style={{marginTop: 10, fontSize: 30}}>{role}</h1>
-        <h2 className='h2_home' style={{marginTop: 15, fontSize: 25}}>{nome}</h2>
-        <span className='span_home' style={{marginTop: 15, fontSize: 22}}>Jogos feitos: {qntdJogos}</span>
-        <span className='span_home' style={{marginTop: 15, fontSize: 22}}>Quantos ganhou: {formatoDinheiro(quantosGanho)}</span>
-        <span className='span_home' style={{marginTop: 15, fontSize: 22}}>Quantos perdeu: {formatoDinheiro(quantosPerdeu)}</span>
-        <span className='span_home' style={{marginTop: 15, fontSize: 22}}>Valor ganho: R$ 0,00</span>
+          <b style={{fontFamily: 'Roboto', fontSize: 22}}>Saldo: {formatoDinheiro(qntdDinheiro)}</b>
+        </div>
+
+        <div className='div_role' style={{display: 'flex', flexDirection: 'row', justifyContent: 'start', alignItems: 'center', marginTop: 10}}>
+          <img src={roleImg} style={{width: 40}}/>
+          <h1 className='h1_home' style={{marginTop: 10, fontSize: 25, fontFamily: 'Roboto'}}> {role}</h1>
+        </div>
+
+        <div className='div_user' style={{display: 'flex', flexDirection: 'row', justifyContent: 'start', alignItems: 'center', marginTop: 10}}>
+          <img src={user} style={{width: 40}}/>
+          <h2 className='h2_home' style={{marginTop: 15, fontSize: 25, fontFamily: 'Roboto'}}> {nome}</h2>
+        </div>
+
+        <span className='span_home' style={{marginTop: 15, marginRight: 45,fontSize: 22, fontFamily: 'Roboto'}}> <img src={game} style={{width: 40}}/> Jogos feitos: {qntdJogos}</span>
+        <span className='span_home' style={{marginTop: 15, fontSize: 22, marginLeft: 8, fontFamily: 'Roboto'}}> <img src={dinheiro} style={{width: 40}}/> Quantos ganhou: {formatoDinheiro(quantosGanho)}</span>
+        <span className='span_home' style={{marginTop: 15, fontSize: 22, marginLeft: 8, fontFamily: 'Roboto'}}> <img src={dinheiro} style={{width: 40}}/> Quantos perdeu: {formatoDinheiro(quantosPerdeu)}</span>
         {role === "ADM" && (
           <>
                 <hr style={{width: 250}}></hr>
@@ -61,6 +75,7 @@ export default function Menu({nome, role, qntdDinheiro, qntdJogos, quantosGanho,
                 </select>
           </>
         )}
+        
       </div>
         <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-30%, -50%)'}}>
             {children}

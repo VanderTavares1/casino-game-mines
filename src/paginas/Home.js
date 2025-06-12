@@ -72,6 +72,7 @@ return (
     quantosPerdeu={quantosPerdeu}
     nomesDeTodosUsuarios={nomesDeTodosUsuarios}
     qntdJogos={qntdJogos}
+    rota={"/login"}
   >
     <div className="main-content">
 

@@ -9,18 +9,7 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   overflow-x: hidden;
 }
-/* 
-.sidebar {
-  flex-shrink: 0;
-  width: 240px;
-  background-color: #8A0F2D;
-  color: white;
-  padding: 30px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  box-shadow: 1px 0 5px rgba(0, 0, 0, 0.3);
-} */
+
 .sidebar {
   background-color: #8A0F2D;
   color: white;
@@ -98,10 +87,10 @@
 
 .btn-voltar {
   position: absolute;
-  top: 800px;
-  width: 38px;
+  top: 880px;
+  width: 70px;
   cursor: pointer;
-  width: 110px;
+  margin-left: 30px;
 }
 
 .btn-voltar:hover {
