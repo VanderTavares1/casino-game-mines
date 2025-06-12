@@ -13,7 +13,7 @@ export default function TelaJogo() {
   const [caixa_escolhida, setCaixa_escolhida] = useState("");
   const [jogoAtivo, setJogoAtivo] = useState(true);
   const [listaDiamantes, setListaDiamantes] = useState([]);
-  const [bombaMinas, setBomba] = useState(0);
+  const [bombaMinas, setBomba] = useState(null);
   const [valorGanhoDimas, setValorGanhoDimas] = useState(0);
   const [nome, setNome] = useState("");
   const [role, setRole] = useState("");
@@ -25,11 +25,11 @@ export default function TelaJogo() {
   const [qntdJogos, setQntdJogos] = useState(0);
 
   const formatoDinheiro = (valor) => {
-  return new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-  }).format(valor);
-};
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    }).format(valor);
+  };
 
   useEffect(() => {
     buscarUsuarioLogado()
@@ -49,6 +49,9 @@ export default function TelaJogo() {
   }, []);
 
     async function enviandoCaixaEscolhidaPeloUsuario(index) {
+
+        console.log("cliquei numa caixa");
+        
         if (!jogoAtivo) return;
         setCaixa_escolhida(index);
         try {
@@ -58,6 +61,7 @@ export default function TelaJogo() {
             if (resp.resultado === "DIAMANTE") {
              setListaDiamantes([...listaDiamantes, index]);
             } else {
+                console.log('bomba', bombaMinas)
                 setBomba(index);
                 setJogoAtivo(false);
             }
@@ -65,6 +69,11 @@ export default function TelaJogo() {
             console.error('Erro enviando caixa escolhida:', err);
         }
     }
+
+    useEffect(() => {
+      console.log('listaDiamantes', listaDiamantes)
+      console.log('bombaMinas', bombaMinas)
+    },[listaDiamantes])
 
     async function enviandoDadosPosParar(id) {
         try{
@@ -84,6 +93,7 @@ export default function TelaJogo() {
     quantosGanho={quantosGanho}
     quantosPerdeu={quantosPerdeu}
     nomesDeTodosUsuarios={nomesDeTodosUsuarios}
+    qntdJogos={qntdJogos}
     rota={"/home"}
   >
     <div
@@ -109,10 +119,8 @@ export default function TelaJogo() {
             {listaDiamantes.includes(index) ? (
                // eslint-disable-next-line
               <img src={diamante} id="img_diamante" />
-            ) : bombaMinas === index && caixa_escolhida === index ? (
-               // eslint-disable-next-line
-              <img src={imgBomba} id="img_bomba" />
-            ) : null}
+            ) : null }
+            {bombaMinas === index ? <img src={imgBomba} id="img_bomba" /> : null}
           </button>
         ))}
       </div>
@@ -126,6 +134,7 @@ export default function TelaJogo() {
       {!jogoAtivo && (
         <div className="fim_jogo">
           <p style={{ fontSize: 50, color: 'white' }}>Você perdeu! A bomba foi encontrada.</p>
+          <button style={{ fontSize: 30, color: 'white' }} onClick={() => navigate('/home')}>Voltar para o menu de jogos </button>
         </div>
       )}
     </div>
